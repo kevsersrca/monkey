@@ -1,53 +1,52 @@
 package token
 
+// TokenType is a string
 type TokenType string
 
+// Token struct represent the lexer token
 type Token struct {
 	Type    TokenType
 	Literal string
 }
 
+// pre-defined TokenType
 const (
-	ILLEGAL = "ILLEGAL"
-	EOF     = "EOF"
-
-	IDENTIFIER = "IDENTIFIER"
-	INT        = "INT"
-
-	ASSIGN   = "="
-	PLUS     = "+"
-	MIUS     = "-"
-	BANG     = "!"
-	ASTERISK = "*"
-	SLASH    = "/"
-	LG       = "<"
-	GT       = ">"
-
+	ILLEGAL   = "ILLEGAL"
+	EOF       = "EOF"
+	IDENT     = "IDENT"
+	INT       = "INT"
+	FLOAT     = "FLOAT"
+	ASSIGN    = "="
+	PLUS      = "+"
 	COMMA     = ","
 	SEMICOLON = ";"
+	MINUS     = "-"
+	BANG      = "!"
+	ASTERISK  = "*"
+	SLASH     = "/"
+	LT        = "<"
+	GT        = ">"
+	LPAREN    = "("
+	RPAREN    = ")"
+	LBRACE    = "{"
+	RBRACE    = "}"
+	FUNCTION  = "FUNCTION"
+	LET       = "LET"
+	TRUE      = "TRUE"
+	FALSE     = "FALSE"
+	IF        = "IF"
+	ELSE      = "ELSE"
+	RETURN    = "RETURN"
+	FOR       = "FOR"
+	EQ        = "=="
+	NOT_EQ    = "!="
+	STRING    = "STRING"
+	LBRACKET  = "["
+	RBRACKET  = "]"
 	COLON     = ":"
-
-	LPAREN = "("
-	RPAREN = ")"
-	LBRACE = "{"
-	RBRACE = "}"
-
-	FUNCTION = "FUNCTION"
-	LET      = "LET"
-	TRUE     = "TRUE"
-	FALSE    = "FALSE"
-	IF       = "IF"
-	ELSE     = "ELSE"
-	RETURN   = "RETURN"
-	STRING   = "STRING"
-
-	EQ  = "=="
-	NEQ = "!="
-
-	LBRACKET = "["
-	RBRACKET = "]"
 )
 
+// reversed keywords
 var keywords = map[string]TokenType{
 	"fn":     FUNCTION,
 	"let":    LET,
@@ -56,11 +55,13 @@ var keywords = map[string]TokenType{
 	"if":     IF,
 	"else":   ELSE,
 	"return": RETURN,
+	"for":    FOR,
 }
 
-func LookupIdentifier(ident string) TokenType {
-	if tok, ok := keywords[ident]; ok {
+// LookupIdentifier used to determinate whether identifier is keyword nor not
+func LookupIdentifier(identifier string) TokenType {
+	if tok, ok := keywords[identifier]; ok {
 		return tok
 	}
-	return IDENTIFIER
+	return IDENT
 }
